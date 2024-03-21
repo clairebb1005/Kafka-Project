@@ -22,3 +22,18 @@ A project is underway to implement Kafka-Python, a client designed for the Apach
    * `val data = List("Test")`
    * `var t = sc.parallelize(data)`: will return `t: org.apache.spark.rdd.RDD[String] = ParallelCollectionRDD[0] at parallelize at <console>:24`.
    * `t.collect()`: will return `res0: Array[String] = Array(Test)`.
+
+## Install Kafka
+1. Go to [Kafka](https://kafka.apache.org/downloads) and click on Binary downloads.
+2. Extract the zipped file into a new created empty folder `C:\Kafka`.
+3. Go to `config` folder and choose:
+   * zookeeper.properties file and change `dataDir` to `dataDir=C:/Kafka/kafka_2.13-3.7.0/zookeeper-data`.
+   * server.properties file and change `log.dirs` to `log.dirs=C:/Kafka/kafka_2.13-3.7.0/kafka-logs `.
+
+## Use Kafka
+Open three seperate Command Prompt, all under `C:\Kafka\kafka_2.13-3.7.0` folder.
+1. Execute Zoo-keeper `.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties`.
+2. After Zoo-keeper is completely executed, execute Kafka Server `.\bin\windows\kafka-server-start.bat .\config\server.properties`.
+3. Execute `.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic bitcoin-prices` to create a topic. It will return `Created topic bitcoin-prices` message.
+
+Now, you can execute your `producer.py` file and it will scrape and stream Bitcoin Price in real-time.
