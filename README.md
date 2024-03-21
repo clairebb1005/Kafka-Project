@@ -37,3 +37,7 @@ Open three seperate Command Prompt, all under `C:\Kafka\kafka_2.13-3.7.0` folder
 3. Execute `.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic bitcoin-prices` to create a topic. It will return `Created topic bitcoin-prices` message.
 
 Now, you can execute your `producer.py` file and it will scrape and stream Bitcoin Price in real-time.
+
+## Setup Python
+1. Use Anaconda to create a new environment for this project: `conda create -n kafka-project python=3.9`.
+2. After installing all the dependencies in `requirement.txt`, add a environment variable `PYSPARK_PYTHON` with your desired Python path to your system environment.
