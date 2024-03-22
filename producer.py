@@ -5,7 +5,7 @@ import time
 
 # Define the Kafka server properties
 kafka_server = 'localhost:9092'
-topic_name = 'bitcoin_prices'
+topic_name = 'bitcoin-prices'
 
 
 # Initialize Kafka producer
@@ -30,9 +30,9 @@ def get_price():
 
 
 # Function to send data to Kafka topic
-def send_to_kafka(producer_instance, price):
+def send_to_kafka(producer_instance, data):
     try:
-        producer_instance.send(topic_name, value={"bitcoin_price": price})
+        producer_instance.send(topic_name, value=data)
         producer_instance.flush()
     except Exception as ex:
         print('Exception in publishing prices')
@@ -43,6 +43,9 @@ if __name__ == "__main__":
     while True:
         bitcoin_price = get_price()
         producer = connect_kafka_producer()
-        send_to_kafka(producer, bitcoin_price)
+        timestamp = int(time.time())
+        data = {"timestamp": timestamp, "bitcoin_price": bitcoin_price}
+        send_to_kafka(producer, data)
+        print(timestamp)
         print("Bitcoin Price:", bitcoin_price)
-        time.sleep(10)  # Fetch data every 10 seconds
+        # time.sleep(5)  # Fetch data every 10 seconds
