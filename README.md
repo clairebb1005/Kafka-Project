@@ -1,4 +1,4 @@
-# Kafka-Project
+# Real-time Data-streaming & Analysis Project
 A project is underway to implement Kafka-Python, a client designed for the Apache Kafka distributed stream processing system, to stream BitCoin price and to use Apache Spark for real-time price analytics.
 
 ## Install Spark
@@ -12,7 +12,7 @@ A project is underway to implement Kafka-Python, a client designed for the Apach
 
 5. Set paths in system environment: `%SPARK_HOME%\bin` and `%HADOOP_HOME%\bin`.
 
-6. Use `C:\Spark\spark-3.5.1-bin-hadoop3\bin\spark-shell` command in command prompt Window while running in administrator mode.
+6. Go to Command Prompt Window in administrator mode and execute `C:\Spark\spark-3.5.1-bin-hadoop3\bin\spark-shell` command.
 
 7. If you see Spark logo appears, then you successfully installed it.
 
@@ -36,8 +36,21 @@ Open three seperate Command Prompt, all under `C:\Kafka\kafka_2.13-3.7.0` folder
 2. After Zoo-keeper is completely executed, execute Kafka Server `.\bin\windows\kafka-server-start.bat .\config\server.properties`.
 3. Execute `.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic bitcoin-prices` to create a topic. It will return `Created topic bitcoin-prices` message.
 
-Now, you can execute your `producer.py` file and it will scrape and stream Bitcoin Price in real-time.
-
 ## Setup Python
 1. Use Anaconda to create a new environment for this project: `conda create -n kafka-project python=3.9`.
 2. After installing all the dependencies in `requirement.txt`, add a environment variable `PYSPARK_PYTHON` with your desired Python path to your system environment.
+
+## Run Code
+1. Run Spark (see 6. in `Install Spark` section).
+2. Run Kafka Server (see 2. in `Use Kafka` section)
+3. Execute `producer.py` file and it will scrape and stream Bitcoin Price in real-time.
+4. Execute `consumer.py` file and it will receive the data and do data processing.
+
+It will show like the following in the console:
+```
++--------------------+-----------------+
+|              window|       mean_price|
++--------------------+-----------------+
+|{2024-03-22 01:47...|65759.99907678064|
++--------------------+-----------------+
+```
